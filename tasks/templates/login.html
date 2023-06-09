@@ -1,0 +1,79 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicia sesión</title>
+    <link rel="stylesheet" href="{% static 'styles/style_login.css' %}">
+</head>
+
+<body>
+    <header class="header">
+        <div class="identidad">
+            <a href="{% url 'index' %}">
+                <img src="{% static 'imgs/identidad/Logo-blanco_NavBar.png' %}" alt="Logo">
+                <h1>GoBet</h1>
+            </a>
+
+        </div>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="{% url 'index' %}">Inicio</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="principal">
+        <div class="contenedor">
+            <div class="login">
+                <h2>Iniciar sesión en GoBet</h2>
+                <span>Todos los campos con * son obligatorios</span>
+                <form class="login-form" action="#" method="post">
+                    {% csrf_token %}
+                    <div class="inputs">
+                        <label for="identificador">Nombre de usuario o Correo electrónico:</label>
+                        <input type="text" id="identificador" name="identificador" required>
+                    </div>
+                    <div class="inputs">
+                        <label for="contraseña">Contraseña:</label>
+                        <input type="password" id="contraseña" name="Contraseña" required>
+                    </div>
+                    <button type="submit" class="btn-login">Iniciar sesión</button>
+                    <a href="">¿Olvidaste tu contraseña?</a>
+                    <span>¿Aun no tienes cuenta? <a href="{% url 'registro' %}">Registrate</a></span>
+                </form>
+            </div>
+            <div class="visual">
+                <img src="{% static 'imgs/identidad/Logo-color.png' %}" alt="logo-color">
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-links">
+                <h4>Siguenos en:</h4>
+                <div class="social-link">
+                    <a href="">
+                        <img src="{% static 'imgs/iconos/ico_facebook.svg' %}" alt="Facebook">
+                    </a>
+                    <a href="">
+                        <img src="{% static 'imgs/iconos/ico_instagram.svg' %}" alt="Instagram">
+                    </a>
+                    <a href="">
+                        <img src="{% static 'imgs/iconos/ico_twitter.svg' %}" alt="Twitter">
+                    </a>
+                    <a href="">
+                        <img src="{% static 'imgs/iconos/ico_youtube.svg' %}" alt="YouTube">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,235 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoBet-Registro</title>
+    <!-- <script src="{% static 'js/registro.js' %}"></script> -->
+    <link rel="stylesheet" href="{% static 'styles/style_registro.css' %}">
+</head>
+
+<body>
+    <header class="header">
+        <div class="identidad">
+            <a href="{% url 'index' %}">
+                <img src="{% static 'imgs/identidad/Logo-blanco_NavBar.png' %}" alt="Logo">
+                <h1>GoBet</h1>
+            </a>
+
+        </div>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="{% url 'index' %}">Inicio</a></li>
+            </ul>
+        </nav>
+        <div class="btn-login">
+            <img src="{% static 'imgs/avatars/user.png' %}" alt="avatar">
+            <a href="{% url 'login' %}">Iniciar Sesión</a>
+        </div>
+    </header>
+
+    <main class="principal">
+        <div class="registro">
+            <div class="info">
+                Crear cuenta<br>Todos los campos con * son obligatorios
+            </div>
+            <form class="formulario" action="" method="post">
+                {% csrf_token %}
+                <div class="nombres">
+                    <div class="inputs user-name">
+                        <label for="user_name">Nombre de usuario</label>
+                        <input type="text" name="user_name" id="user_name" required>
+                    </div>
+                    <div class="inputs">
+                        <label for="nombres">Nombres</label>
+                        <input type="text" name="Nombres" id="nombres" required>
+                    </div>
+                    <div class="inputs">
+                        <label for="apellidos">Apellidos</label>
+                        <input type="text" name="Apellidos" id="apellidos" required>
+                    </div>
+                </div>
+                <div class="ubicacion">
+                    <div class="selects">
+                        <label for="departamentos">Departamento:</label>
+                        <select id="departamentos" name="Departamento" onchange="cargarMunicipios()" required>
+                            <option value="">Seleccione un departamento</option>
+                        </select>
+                    </div>
+                    <div class="selects">
+                        <label for="municipios">Municipio:</label>
+                        <select id="municipios" name="Municipio" required>
+                            <option value="">Seleccione un municipio</option>
+                        </select>
+                    </div>
+                    <div class="inputs">
+                        <label for="direccion">Dirección</label>
+                        <input type="text" name="Dirección" id="direccion" required>
+                    </div>
+                </div>
+                <div class="documento">
+                    <div class="selects">
+                        <label for="tipo_doc">Tipo de documento</label>
+                        <select id="tipo_doc" name="Tipo_doc" required>
+                            <option value="">Seleccione una opción</option>
+                        </select>
+                    </div>
+                    <div class="inputs">
+                        <label for="n_doc">Numero de documento</label>
+                        <input type="text" name="N_doc" id="n_doc" required>
+                    </div>
+                </div>
+                <div class="general">
+                    <div class="inputs">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" name="Correo" id="email" required>
+                    </div>
+                    <div class="inputs">
+                        <label for="contrasena">Contraseña</label>
+                        <input type="password" name="Contraseña" id="contrasena" required>
+                    </div>
+                    <div class="inputs n-cel">
+                        <label for="n_cel">Numero de celular</label>
+                        <input type="tel" name="N_cel" id="n_cel" pattern="[0-9]{10}" placeholder="Ejemplo: 3211234567"
+                            required>
+                    </div>
+                    <button class="btn-registrar" type="submit">Registrar</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-links">
+                <h4>Siguenos en:</h4>
+                <div class="social-link">
+                    <a href="">
+                        <img src="{% static 'imgs/iconos/ico_facebook.svg' %}" alt="Facebook">
+                    </a>
+                    <a href="">
+                        <img src="{% static 'imgs/iconos/ico_instagram.svg' %}" alt="Instagram">
+                    </a>
+                    <a href="">
+                        <img src="{% static 'imgs/iconos/ico_twitter.svg' %}" alt="Twitter">
+                    </a>
+                    <a href="">
+                        <img src="{% static 'imgs/iconos/ico_youtube.svg' %}" alt="YouTube">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Obtener referencia al elemento select
+        var selectDepartamentos = document.getElementById('departamentos');
+
+        // Datos de ejemplo para los departamentos
+        const archivoCSV = '{% static "Municipios_por_departamento.csv" %}';
+        var departamentos = [
+            { id: 1, nombre: 'Departamento 1' },
+            { id: 2, nombre: 'Departamento 2' },
+            { id: 3, nombre: 'Departamento 3' }
+        ];
+
+        function cargarDepartamentos() {
+            const selectDepartamentos = document.getElementById("departamentos");
+
+            // Limpia opciones anteriores
+            selectDepartamentos.innerHTML = '<option value="">Seleccione un departamento</option>';
+
+            // Conjunto para almacenar los nombres únicos de los departamentos
+            const departamentosUnicos = new Set();
+
+            // Carga el archivo CSV
+            fetch(archivoCSV)
+                .then(response => response.text())
+                .then(data => {
+                    // Parsea el archivo CSV
+                    const filas = data.split('\n');
+                    filas.forEach((fila, index) => {
+                        if (index > 0) { // Ignora la primera fila (encabezados)
+                            const [departamento] = fila.split(',');
+                            departamentosUnicos.add(departamento);
+                        }
+                    });
+
+                    // Agrega las opciones al selector de departamentos
+                    departamentosUnicos.forEach(departamento => {
+                        const option = document.createElement("option");
+                        option.value = departamento;
+                        option.textContent = departamento;
+                        selectDepartamentos.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error al cargar el archivo CSV:', error));
+
+        }
+
+        // Llamar a la función para cargar los departamentos al cargar la página
+        cargarDepartamentos();
+
+        // Función para cargar los municipios del departamento seleccionado
+        function cargarMunicipios() {
+            const departamentoSeleccionado = document.getElementById("departamentos").value;
+            const selectMunicipios = document.getElementById("municipios");
+
+            // Limpia opciones anteriores
+            selectMunicipios.innerHTML = '<option value="">Seleccione un municipio</option>';
+
+            if (departamentoSeleccionado !== "") {
+                // Carga el archivo CSV
+                fetch('/static/Municipios_por_departamento.csv')
+                    .then(response => response.text())
+                    .then(data => {
+                        // Parsea el archivo CSV
+                        const filas = data.split('\n');
+                        filas.forEach((fila, index) => {
+                            if (index > 0) { // Ignora la primera fila (encabezados)
+                                const [departamento, municipio] = fila.split(',');
+                                if (departamento === departamentoSeleccionado) {
+                                    const option = document.createElement("option");
+                                    option.value = municipio;
+                                    option.textContent = municipio;
+                                    selectMunicipios.appendChild(option);
+                                }
+                            }
+                        });
+                    })
+                    .catch(error => console.error('Error al cargar el archivo CSV:', error));
+            }
+        }
+
+        var selectTipoDoc = document.getElementById('tipo_doc');
+
+        var tiposDocumento = [
+            { id: 1, nombre: 'Cedula de ciudadania' },
+            { id: 2, nombre: 'Pasaporte' }
+        ];
+
+        function cargarTiposDocumento() {
+            selectTipoDoc.innerHTML = '';
+
+            var opcionPredeterminada = document.createElement('option');
+            opcionPredeterminada.value = '';
+            opcionPredeterminada.textContent = 'Seleccione una opción';
+            selectTipoDoc.appendChild(opcionPredeterminada);
+
+            tiposDocumento.forEach(function (tipoDoc) {
+                var opcion = document.createElement('option');
+                opcion.value = tipoDoc.nombre;
+                opcion.textContent = tipoDoc.nombre;
+                selectTipoDoc.appendChild(opcion);
+            });
+        }
+
+        cargarTiposDocumento();
+    </script>
+</body>
+
+</html>

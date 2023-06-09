@@ -1,0 +1,203 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoBet</title>
+    <link rel="stylesheet" href="{% static 'styles/style_inicio.css' %}">
+</head>
+
+<body>
+    <header class="header">
+        <div class="identidad">
+            <a href="{% url 'inicio' %}">
+                <img src="{% static 'imgs/identidad/Logo-blanco_NavBar.png' %}" alt="Logo">
+                <h1>GoBet</h1>
+            </a>
+        </div>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                <li><a href="#">Apuestas en vivo</a></li>
+                <li><a href="#">Mis apustas</a></li>
+            </ul>
+        </nav>
+        <div class="dropdown">
+            <div class="dropdown-btn">
+                <img src="{% static 'imgs/avatars/user.png' %}" alt="avatar">
+                {% if user.is_authenticated %}
+                <span>{{ user.username }}</span>
+                {% endif %}
+            </div>
+            <div class="dropdown-content">
+                <div class="saldo">
+                    <a href="#" class="dropdown-item">Saldo</a>
+                    <span>$ 5.100</span>
+                </div>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">Mi cuenta</a>
+                <a href="#" class="dropdown-item">Recargas</a>
+                <a href="#" class="dropdown-item">Retiros</a>
+                <div class="dropdown-divider"></div>
+                <a href="{% url 'salir' %}" class="dropdown-item">Cerrar sesión</a>
+            </div>
+        </div>
+
+    </header>
+
+    <main class="principal">
+        <div class="banner">
+            <img src="{% static 'imgs/identidad/Logo-color.png' %}" alt="Logo-color">
+            <div class="informacion">
+                <p>Apoya a tu equipo favorito apostando en GoBet</p>
+                <div class="cards-info">
+                    <div class="card-info internacional">
+                        <img src="{% static 'imgs/iconos/internacional.png' %}" alt="icono">
+                        <h3>Internacional</h3>
+                        <p>Todos tus equipos favoritos en un solo lugar</p>
+                    </div>
+                    <div class="card-info pagos">
+                        <img src="{% static 'imgs/iconos/tarjeta.png' %}" alt="icono">
+                        <h3>Pagos faciles</h3>
+                        <p>Varias formas de pago para que le apuestes en tus deportes favoritos</p>
+                    </div>
+                    <div class="card-info seguro">
+                        <img src="{% static 'imgs/iconos/seguro.png' %}" alt="icono">
+                        <h3>Seguro</h3>
+                        <p>Toda informacion está segura para que apuestes con tranquilidad</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="apuestas">
+            <h2>Apuestas en vivo</h2>
+            <div class="cards-eventos">
+                <div class="evento">
+                    <div class="encuentro">
+                        <h3>rival 1</h3>
+                        <span>vs</span>
+                        <h3>rival 2</h3>
+                    </div>
+                    <span class="liga">Futbol/Inglaterra/Premiere Leage</span>
+                    <div class="cuotas">
+                        <div class="eq-local">
+                            <span class="cuota">2.50</span>
+                            <span class="nombre-rival">Rival 1</span>
+                        </div>
+                        <div class="empate">
+                            <span class="cuota">3.00</span>
+                            <span class="nombre-rival">Empate</span>
+                        </div>
+                        <div class="eq-visitante">
+                            <span class="cuota">2.80</span>
+                            <span class="nombre-rival">Rival 2</span>
+                        </div>
+                    </div>
+                    <img class="logo-liga" src="{% static 'imgs/logos de ligas/Premier_League.png' %}" alt="logo-liga">
+                    <button class="btn-apostar">Apostar</button>
+                </div>
+                <div class="evento">
+                    <div class="encuentro">
+                        <h3>rival 1</h3>
+                        <span>vs</span>
+                        <h3>rival 2</h3>
+                    </div>
+                    <span class="liga">Futbol/Inglaterra/Premiere Leage</span>
+                    <div class="cuotas">
+                        <div class="eq-local">
+                            <span class="cuota">2.50</span>
+                            <span class="nombre-rival">Rival 1</span>
+                        </div>
+                        <div class="empate">
+                            <span class="cuota">3.00</span>
+                            <span class="nombre-rival">Empate</span>
+                        </div>
+                        <div class="eq-visitante">
+                            <span class="cuota">2.80</span>
+                            <span class="nombre-rival">Rival 2</span>
+                        </div>
+                    </div>
+                    <img class="logo-liga" src="{% static 'imgs/logos de ligas/LaLiga_Santander.png' %}" alt="logo-liga">
+                    <button class="btn-apostar">Apostar</button>
+                </div>
+                <div class="evento">
+                    <div class="encuentro">
+                        <h3>rival 1</h3>
+                        <span>vs</span>
+                        <h3>rival 2</h3>
+                    </div>
+                    <span class="liga">Futbol/Inglaterra/Premiere Leage</span>
+                    <div class="cuotas">
+                        <div class="eq-local">
+                            <span class="cuota">2.50</span>
+                            <span class="nombre-rival">Rival 1</span>
+                        </div>
+                        <div class="empate">
+                            <span class="cuota">3.00</span>
+                            <span class="nombre-rival">Empate</span>
+                        </div>
+                        <div class="eq-visitante">
+                            <span class="cuota">2.80</span>
+                            <span class="nombre-rival">Rival 2</span>
+                        </div>
+                    </div>
+                    <img class="logo-liga" src="{% static 'imgs/logos de ligas/LaLiga_Santander.png' %}" alt="logo-liga">
+                    <button class="btn-apostar">Apostar</button>
+                </div>
+                <div class="evento">
+                    <div class="encuentro">
+                        <h3>rival 1</h3>
+                        <span>vs</span>
+                        <h3>rival 2</h3>
+                    </div>
+                    <span class="liga">Futbol/Inglaterra/Premiere Leage</span>
+                    <div class="cuotas">
+                        <div class="eq-local">
+                            <span class="cuota">2.50</span>
+                            <span class="nombre-rival">Rival 1</span>
+                        </div>
+                        <div class="empate">
+                            <span class="cuota">3.00</span>
+                            <span class="nombre-rival">Empate</span>
+                        </div>
+                        <div class="eq-visitante">
+                            <span class="cuota">2.80</span>
+                            <span class="nombre-rival">Rival 2</span>
+                        </div>
+                    </div>
+                    <img class="logo-liga" src="{% static 'imgs/logos de ligas/Liga_BetPlay-Dimayor.png' %}" alt="logo-liga">
+                    <button class="btn-apostar">Apostar</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-links">
+                <h4>Siguenos en:</h4>
+                <div class="social-link">
+                    <a href="">
+                        <img src="{% static 'imgs/iconos/ico_facebook.svg' %}" alt="Facebook">
+                    </a>
+                    <a href="">
+                        <img src="{% static 'imgs/iconos/ico_instagram.svg' %}" alt="Instagram">
+                    </a>
+                    <a href="">
+                        <img src="{% static 'imgs/iconos/ico_twitter.svg' %}" alt="Twitter">
+                    </a>
+                    <a href="">
+                        <img src="{% static 'imgs/iconos/ico_youtube.svg' %}" alt="YouTube">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
